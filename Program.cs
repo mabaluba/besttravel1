@@ -12,19 +12,23 @@ namespace besttravel
             {
                 var listOfVariants = new SortedSet<int>(ls);
 
-                //var listOfVariants = new List<int>();
-                for (int i = 0; i <= ls.Count-k; i++)
-                {
-                    var c = 0;
-                    var arr = new int[k];
-                    arr[0] = ls[i];
-                    for (int j = i+1; j <=ls.Count-(k-1); j++)
-                    {
-                        ls.CopyTo(j, arr ,1, k-1);
-                        listOfVariants.Add(arr.Sum());
-                        c++;
-                    }
-                }
+                #region oldAlgo
+                //for (int i = 0; i <= ls.Count-k; i++)
+                //{
+                //    var c = 0;
+                //    var arr = new int[k];
+                //    arr[0] = ls[i];
+                //    for (int j = i+1; j <=ls.Count-(k-1); j++)
+                //    {
+                //        ls.CopyTo(j, arr ,1, k-1);
+                //        listOfVariants.Add(arr.Sum());
+                //        c++;
+                //    }
+                //} 
+                #endregion
+
+
+
                 var a  = listOfVariants.Where(i=>i<=t);
                 return a.Any() ? a.Max() : (int?) null;
             }
