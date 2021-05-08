@@ -10,21 +10,22 @@ namespace besttravel
         {
             public static int? ChooseBestSum(int t, int k, List<int> ls)
             {
-                var listOfVariants = new SortedSet<int>(ls);
+                var listOfVariants = new SortedSet<int>(ls).Reverse();
+
 
                 #region oldAlgo
-                //for (int i = 0; i <= ls.Count-k; i++)
-                //{
-                //    var c = 0;
-                //    var arr = new int[k];
-                //    arr[0] = ls[i];
-                //    for (int j = i+1; j <=ls.Count-(k-1); j++)
-                //    {
-                //        ls.CopyTo(j, arr ,1, k-1);
-                //        listOfVariants.Add(arr.Sum());
-                //        c++;
-                //    }
-                //} 
+                for (int i = 0; i <= ls.Count - k; i++)
+                {
+                    var c = 0;
+                    var arr = new int[k];
+                    arr[0] = ls[i];
+                    for (int j = i + 1; j <= ls.Count - (k - 1); j++)
+                    {
+                        ls.CopyTo(j, arr, 1, k - 1);
+                        listOfVariants.Append(arr.Sum());
+                        c++;
+                    }
+                }
                 #endregion
 
 
