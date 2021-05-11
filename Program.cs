@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,28 +11,29 @@ namespace besttravel
         {
             public static int? ChooseBestSum(int t, int k, List<int> ls)
             {
-                var listOfVariants = new SortedSet<int>();
-                var listOfValues = new SortedSet<int>(ls).Reverse().ToList();
+                //var listOfValues = new SortedSet<int>(ls).Reverse().ToList();//sorted - упорядоченное множество(набор), hash - неупорядоченное
+                var listOfValues = new List<int>(ls).OrderBy(i=>i);
+                var listOfVariants = new HashSet<int>();
 
 
                 #region oldAlgo
-                for (int i = 0; i <= listOfValues.Count() - k; i++)
-                {
-                    var c = 0;
-                    var arr = new int[k];
-                    arr[0] = listOfValues[i];
-                    for (int j = i + 1; j <= ls.Count - (k - 1); j++)
-                    {
-                        ls.CopyTo(j, arr, 1, k - 1);
-                        listOfVariants.Add(arr.Sum());
-                        c++;
-                    }
-                }
+                //for (int i = 0; i <= listOfValues.Count() - k; i++)
+                //{
+                //    var c = 0;
+                //    var arr = new int[k];
+                //    arr[0] = listOfValues[i];
+                //    for (int j = i + 1; j <= ls.Count - (k - 1); j++)
+                //    {
+                //        ls.CopyTo(j, arr, 1, k - 1);
+                //        listOfVariants.Add(arr.Sum());
+                //        c++;
+                //    }
+                //}
                 #endregion
 
 
 
-                var a  = listOfVariants.Where(i=>i<=t);
+                var a  = listOfVariants.Where(i=> i<=t);
                 return a.Any() ? a.Max() : (int?) null;
             }
         }
