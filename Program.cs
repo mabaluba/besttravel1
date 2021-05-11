@@ -12,7 +12,7 @@ namespace besttravel
             public static int? ChooseBestSum(int t, int k, List<int> ls)
             {
                 //var listOfValues = new SortedSet<int>(ls).Reverse().ToList();//sorted - упорядоченное множество(набор), hash - неупорядоченное
-                var listOfValues = new List<int>(ls).OrderBy(i=>i);
+                var listOfValues = ls.OrderBy(i=>i);
                 var listOfVariants = new HashSet<int>();
 
 
