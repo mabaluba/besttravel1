@@ -8,9 +8,9 @@ namespace besttravel
 
     public static class SumOfK
     {
-        public static IEnumerable<T[]> Combinations<T>(this T[] values, int k)
+        public static IEnumerable<T[]> Combinations<T>(this List<T> values, int k)
         {
-            if (k < 0 || values.Length < k)
+            if (k < 0 || values.Count < k)
                 yield break; // invalid parameters, no combinations possible
 
             // generate the initial combination indices
@@ -32,7 +32,7 @@ namespace besttravel
 
                 // find first index to update
                 var indexToUpdate = k - 1;
-                while (indexToUpdate >= 0 && combIndices[indexToUpdate] >= values.Length - k + indexToUpdate)
+                while (indexToUpdate >= 0 && combIndices[indexToUpdate] >= values.Count - k + indexToUpdate)
                 {
                     indexToUpdate--;
                 }
@@ -50,7 +50,7 @@ namespace besttravel
         public static int? ChooseBestSum(int t, int k, List<int> ls)
         {
             //var listOfValues = new SortedSet<int>(ls).Reverse().ToList();//sorted - упорядоченное множество(набор), hash - неупорядоченное
-            var listOfValues = ls.OrderBy(i => i).ToArray();
+            //var listOfValues = ls.OrderBy(i => i).ToArray();
             var listOfVariants = new SortedSet<int>();
 
             #region oldAlgo
@@ -68,7 +68,7 @@ namespace besttravel
             //}
             #endregion
 
-            var b = listOfValues.Combinations(k);
+            var b = ls.Combinations(k);
 
             foreach (var combination in b)
             {
@@ -90,7 +90,7 @@ namespace besttravel
             //Console.WriteLine(SumOfK.ChooseBestSum(230, 3, new List<int> {91, 74, 73, 85, 73, 81, 87 }));
             Console.WriteLine(SumOfK.ChooseBestSum(163, 3, new List<int> {50}));
             Console.WriteLine(SumOfK.ChooseBestSum(331, 4, new List<int> {50, 55, 56, 57, 58, 50, 91, 74, 73, 85, 73, 81, 87, 91, 74, 73, 85, 73, 81, 87, 91, 74, 73, 85, 73, 81, 87}));
-
+            Console.ReadKey();
         }
     }
 }
